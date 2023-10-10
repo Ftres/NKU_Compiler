@@ -1,0 +1,152 @@
+
+;; Function main (main, funcdef_no=1731, decl_uid=44205, cgraph_uid=465, symbol_order=495)
+
+
+Analyzing function body size: int main()/495
+
+IPA function summary for int main()/495
+  global time:     44.000000
+  self size:       18
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:6.000000, time:7.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>]/760 function body not available
+      freq:1.00 loop depth: 0 size: 3 time: 12
+    std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]/1144 function body not available
+      freq:1.00 loop depth: 0 size: 4 time: 13
+    std::basic_istream<_CharT, _Traits>& std::basic_istream<_CharT, _Traits>::operator>>(int&) [with _CharT = char; _Traits = std::char_traits<char>]/1142 function body not available
+      freq:1.00 loop depth: 0 size: 3 time: 12
+
+int main ()
+{
+  struct basic_ostream & D.49113;
+  int f;
+  int n;
+  int i;
+  int D.49111;
+  int n.0_1;
+  struct basic_ostream & _2;
+  struct basic_ostream & _11;
+  int _14;
+
+  <bb 2> :
+  std::basic_istream<char>::operator>> (&cin, &n);
+
+  <bb 3> :
+  i_8 = 2;
+  f_9 = 1;
+  goto <bb 5>; [INV]
+
+  <bb 4> :
+  f_15 = f_4 * i_3;
+  i_16 = i_3 + 1;
+
+  <bb 5> :
+  # i_3 = PHI <i_8(3), i_16(4)>
+  # f_4 = PHI <f_9(3), f_15(4)>
+  n.0_1 = n;
+  if (i_3 <= n.0_1)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 6> :
+  _11 = std::basic_ostream<char>::operator<< (&cout, f_4);
+
+  <bb 7> :
+  _2 = _11;
+  std::basic_ostream<char>::operator<< (_2, endl);
+
+  <bb 8> :
+  n ={v} {CLOBBER};
+  _14 = 0;
+
+  <bb 9> :
+<L3>:
+  return _14;
+
+  <bb 10> :
+<L4>:
+  n ={v} {CLOBBER};
+  resx 1
+
+}
+
+
+
+;; Function __static_initialization_and_destruction_0 (_Z41__static_initialization_and_destruction_0ii, funcdef_no=2231, decl_uid=49103, cgraph_uid=965, symbol_order=1022)
+
+
+Analyzing function body size: void __static_initialization_and_destruction_0(int, int)/1022
+
+IPA function summary for void __static_initialization_and_destruction_0(int, int)/1022
+  global time:     30.000000
+  self size:       13
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:5.000000, time:6.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    int __cxxabiv1::__cxa_atexit(void (*)(void*), void*, void*)/1148 function body not available
+      freq:1.00 loop depth: 0 size: 4 time: 13
+    std::ios_base::Init::Init()/1147 function body not available
+      freq:1.00 loop depth: 0 size: 2 time: 11
+
+void __static_initialization_and_destruction_0 (int __initialize_p, int __priority)
+{
+  <bb 2> :
+  if (__initialize_p_2(D) == 1)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 3> :
+  if (__priority_4(D) == 65535)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  std::ios_base::Init::Init (&__ioinit);
+  __cxxabiv1::__cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+
+  <bb 5> :
+  return;
+
+}
+
+
+
+;; Function _GLOBAL__sub_I_main (_GLOBAL__sub_I_main, funcdef_no=2232, decl_uid=49109, cgraph_uid=966, symbol_order=1141)
+
+
+Analyzing function body size: (static initializers for main.cpp)/1141
+
+IPA function summary for (static initializers for main.cpp)/1141
+  global time:     14.000000
+  self size:       6
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:1.000000, time:2.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    void __static_initialization_and_destruction_0(int, int)/1022 function not considered for inlining
+      freq:1.00 loop depth: 0 size: 3 time: 12 callee size: 6 stack: 0
+
+void _GLOBAL__sub_I_main ()
+{
+  <bb 2> :
+  __static_initialization_and_destruction_0 (1, 65535);
+  return;
+
+}
+
+

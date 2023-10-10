@@ -1,0 +1,98 @@
+
+;; Function main (main, funcdef_no=1731, decl_uid=44205, cgraph_uid=465, symbol_order=495)
+
+int main ()
+{
+  struct basic_ostream & D.49113;
+  int f;
+  int n;
+  int i;
+  int D.49111;
+  int n.0_1;
+  struct basic_ostream & _2;
+  struct basic_ostream & _11;
+  int _14;
+
+  <bb 2> :
+  std::basic_istream<char>::operator>> (&cin, &n);
+
+  <bb 3> :
+  i_8 = 2;
+  f_9 = 1;
+  goto <bb 5>; [INV]
+
+  <bb 4> :
+  f_15 = f_4 * i_3;
+  i_16 = i_3 + 1;
+
+  <bb 5> :
+  # i_3 = PHI <i_8(3), i_16(4)>
+  # f_4 = PHI <f_9(3), f_15(4)>
+  n.0_1 = n;
+  if (i_3 <= n.0_1)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 6>; [INV]
+
+  <bb 6> :
+  _11 = std::basic_ostream<char>::operator<< (&cout, f_4);
+
+  <bb 7> :
+  _2 = _11;
+  std::basic_ostream<char>::operator<< (_2, endl);
+
+  <bb 8> :
+  n ={v} {CLOBBER};
+  _14 = 0;
+
+  <bb 9> :
+<L3>:
+  return _14;
+
+  <bb 10> :
+<L4>:
+  n ={v} {CLOBBER};
+  resx 1
+
+}
+
+
+
+;; Function __static_initialization_and_destruction_0 (_Z41__static_initialization_and_destruction_0ii, funcdef_no=2231, decl_uid=49103, cgraph_uid=965, symbol_order=1022)
+
+void __static_initialization_and_destruction_0 (int __initialize_p, int __priority)
+{
+  <bb 2> :
+  if (__initialize_p_2(D) == 1)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 3> :
+  if (__priority_4(D) == 65535)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  std::ios_base::Init::Init (&__ioinit);
+  __cxxabiv1::__cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+
+  <bb 5> :
+  return;
+
+}
+
+
+
+;; Function _GLOBAL__sub_I_main (_GLOBAL__sub_I_main, funcdef_no=2232, decl_uid=49109, cgraph_uid=966, symbol_order=1141)
+
+void _GLOBAL__sub_I_main ()
+{
+  <bb 2> :
+  __static_initialization_and_destruction_0 (1, 65535);
+  return;
+
+}
+
+

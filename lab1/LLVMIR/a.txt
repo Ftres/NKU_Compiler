@@ -1,0 +1,90 @@
+1 ; 全 局 常 量 声 明 const f l o a t k=2.0;
+2 @k = constant f l o a t 2.000000 e+00, align 4
+3 ; 全 局 变 量 声 明 f l o a t a =2.0;
+4 @a = global f l o a t 2.000000 e+00, align 4
+5 ; 全 局 变 量 声 明 f l o a t b=2.0;
+6 @b = global f l o a t 2.000000 e+01, align 4
+7 ; 全 局 变 量 声 明 c [3]={1 ,2 ,3};
+8 @c = global [3 x i32 ] [ i32 1 , i32 2 , i32 3 ] , align 4
+9
+10 ; 定 义 函 数 f l o a t func ( int d)
+11 define f l o a t @func ( i32 %0) {
+12 %2 = a l l o c a i32 , align 4
+13 store i32 %0, i32 ∗ %2, align 4
+14 %3 = load float , f l o a t ∗ @a, align 4 ; %3存a的值 , f l o a t 类 型
+15 %4 = load i32 , i32 ∗ %2, align 4 ; %4存 参 数d的 值， int 类 型
+16 %5 = s i t o f p i32 %4 to f l o a t ; %4进 行 类 型 转 换， int 转 f l o a t
+17 %6 = fmul f l o a t %3, %5
+18 %7 = f p t o s i f l o a t %6 to i32 ; %6进 行 类 型 转 换， f l o a t 转 int
+19 store i32 %7, i32 ∗ getelementptr inbounds ( [ 3 x i32 ] , [3 x i32 ]∗ @c, i64 0 ,i64 1) , align 4 ; %7的 值 存 入 c [ 1 ]
+20 %8 = load i32 , i32 ∗ getelementptr inbounds ( [ 3 x i32 ] , [3 x i32 ]∗ @c, i64 0 , i64 0) , align 4 ; %8=c [ 0 ]
+21 %9 = load i32 , i32 ∗ %2, align 4 ; %9=d
+22 %10 = srem i32 %8, %9
+23 store i32 %10, i32 ∗ getelementptr inbounds ( [ 3 x i32 ] , [3 x i32 ]∗ @c, i64 0 , i64 2) , align 4 ; c [2]= c [0]%d ;
+24 %11 = load i32 , i32 ∗ getelementptr inbounds ( [ 3 x i32 ] , [3 x i32 ]∗ @c, i64 0 , i64 1) , align 4 ; %11=c [ 1 ]
+25 %12 = s i t o f p i32 %11 to f l o a t ; %11进 行 类 型 转 换， int 转 f l o a t
+26 %13 = fadd f l o a t −2.000000e+00, %12 ; %13=−k
+27 %14 = load i32 , i32 ∗ getelementptr inbounds ( [ 3 x i32 ] , [3 x i32 ]∗ @c, i64 0 , i64 2) , align 4
+28 %15 = s i t o f p i32 %14 to f l o a t
+29 %16 = fadd f l o a t %13, %15
+30 ret f l o a t %16 ; return −k+c [1]+ c [ 2 ] ;
+31 }
+32
+33 ; 定 义 函 数 int main ()
+34 define i32 @main() {
+35 %1 = a l l o c a i32 , align 4
+36 %2 = a l l o c a i32 , align 4
+37 %3 = a l l o c a i32 , align 4
+38 store i32 0 , i32 ∗ %1, align 4 ; ∗%1=0
+39 store i32 0 , i32 ∗ %2, align 4 ; ∗%2=0;
+40 %4 = c a l l i32 @getint ()
+41 store i32 %4, i32 ∗ %3, align 4 ; ∗%3=getint () ;
+42 br l a b e l %5
+43
+44 ; 实 现 while 循 环 while ( i <10) { . . . }
+45 5:
+46 %6 = load i32 , i32 ∗ %2, align 4 ; 局 部 变 量 i=%6=0
+47 %7 = icmp s l t i32 %6, 10
+48 ; 如 果 i <10， 则 跳 转 则 l a b e l%8， 否 则 跳 转 至 l a b l e%22
+49 br i1 %7, l a b e l %8, l a b e l %22
+50
+51 ; l a b e l%8和 l a b e l%22本 质 上 是 实 现 了 i f (b/a==0&&a>21) break 的 条 件 分 支
+52 8:
+53 %9 = load float , f l o a t ∗ @a, align 4
+54 %10 = fadd f l o a t %9, 3.000000 e+00
+55 store f l o a t %10, f l o a t ∗ @a, align 4 ; a=a+3;
+56 %11 = load float , f l o a t ∗ @b, align 4 ; %11=b ;
+57 %12 = load float , f l o a t ∗ @a, align 4 ; %12=a ;
+58 %13 = fdiv f l o a t %11, %12 ; %13=a/b
+59 %14 = fcmp oeq f l o a t %13, 0.000000 e+00
+60 ; 如 果 满 足a/b==0， 则 跳 转 至 l a b e l%15， 接 着 判 断 下 一 个 条 件， 否 则 跳 转 至 l a b e l%19
+61 br i1 %14, l a b e l %15, l a b e l %19
+62
+63 15:
+64 %16 = load float , f l o a t ∗ @a, align 4
+65 %17 = fcmp ogt f l o a t %16, 2.100000 e+01
+66 ; 如 果a>21， 则 跳 转 至 l a b e l%18， 否 则 跳 转 至 l a b e l%19
+67 br i1 %17, l a b e l %18, l a b e l %19
+68
+69 18:
+70 ; 实 现 break ， 跳 出 while 循 环
+71 br l a b e l %22
+72
+73 19:
+74 %20 = load i32 , i32 ∗ %2, align 4
+75 %21 = add nsw i32 %20, 1
+76 store i32 %21, i32 ∗ %2, align 4 ; 实 现 i=i+1， 值 存 入%2
+77 br l a b e l %5
+78
+79 22:
+80 %23 = load i32 , i32 ∗ %3, align 4
+81 %24 = c a l l f l o a t @func ( i32 %23) ; 调 用 函 数 func (%23)
+82 %25 = f p t o s i f l o a t %24 to i32 ; %24进 行 类 型 转 换， f l o a t 转 int
+83 c a l l void @putint ( i32 %25) ; 调 用 函 数 putint (%25)
+84
+85 ret i32 0
+86 }
+87 ; 函 数 声 明
+88 declare i32 @getint ()
+89 declare void @putint ( i32 )
+
