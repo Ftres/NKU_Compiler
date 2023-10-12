@@ -1,4 +1,5 @@
-# NKU_Compiler
+# NKU 编译系统原理课程实验仓库
 --------------
 
-NKU Compiler Experiment
+本库存储编译原理课程实验代码，致力于构造一个完整的编译器。
+
